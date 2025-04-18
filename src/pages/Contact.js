@@ -1,6 +1,28 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
+import emailjs from 'emailjs-com';
 
 const Contact = () => {
+  const formRef = useRef();
+  const [status, setStatus] = useState('');
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+    emailjs.sendForm(
+      process.env.REACT_APP_EMAILJS_SERVICE_ID,
+      process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+      formRef.current,
+      process.env.REACT_APP_EMAILJS_PUBLIC_KEY
+    )
+    .then(() => {
+      setStatus('Message sent successfully!');
+      formRef.current.reset();
+    })
+    .catch((error) => {
+      console.error(error.text);
+      setStatus('Failed to send message.');
+    });
+  };
+
   return (
     <div className="container py-5">
       <div className="text-center mb-4">
@@ -9,34 +31,33 @@ const Contact = () => {
       </div>
 
       <div className="row">
-        {/* Contact Form */}
         <div className="col-md-6 mb-4">
-          <form>
+          <form ref={formRef} onSubmit={sendEmail}>
             <div className="mb-3">
               <label htmlFor="name" className="form-label">Name</label>
-              <input type="text" className="form-control" id="name" placeholder="Your Name" />
+              <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" required />
             </div>
 
             <div className="mb-3">
               <label htmlFor="email" className="form-label">Email address</label>
-              <input type="email" className="form-control" id="email" placeholder="your@email.com" />
+              <input type="email" name="email" className="form-control" id="email" placeholder="your@email.com" required />
             </div>
 
             <div className="mb-3">
               <label htmlFor="message" className="form-label">Message</label>
-              <textarea className="form-control" id="message" rows="4" placeholder="Your message..."></textarea>
+              <textarea name="message" className="form-control" id="message" rows="4" placeholder="Your message..." required></textarea>
             </div>
 
             <button type="submit" className="btn btn-primary">Send Message</button>
           </form>
+          {status && <p className="mt-3">{status}</p>}
         </div>
 
-        {/* Google Map */}
         <div className="col-md-6">
           <div className="ratio ratio-4x3">
             <iframe
               title="Google Map"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15955.45248736055!2d36.81468485799215!3d-1.2987160217782395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10e714eef015%3A0x86e279ab6dfb45e9!2sUpper%20Hill%2C%20Nairobi!5e0!3m2!1sen!2ske!4v1617038941503!5m2!1sen!2ske"
+              src="https://www.google.com/maps/embed?pb=..."
               width="100%"
               height="100%"
               style={{ border: 0 }}
