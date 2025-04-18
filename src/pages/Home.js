@@ -26,7 +26,7 @@ const Home = () => {
             src={image1}
             alt="First slide"
           />
-          <Carousel.Caption>
+          <Carousel.Caption className="carousel-caption-custom">
             <h3>Professional Car Services</h3>
             <p>We take care of your car like it's our own.</p>
           </Carousel.Caption>
@@ -38,7 +38,7 @@ const Home = () => {
             src={image2}
             alt="Second slide"
           />
-          <Carousel.Caption>
+          <Carousel.Caption className="carousel-caption-custom">
             <h3>Expert Mechanics</h3>
             <p>Trained professionals ready to help you.</p>
           </Carousel.Caption>
@@ -50,7 +50,7 @@ const Home = () => {
             src={image3}
             alt="Third slide"
           />
-          <Carousel.Caption>
+          <Carousel.Caption className="carousel-caption-custom">
             <h3>Quick & Reliable</h3>
             <p>Book an appointment online with ease.</p>
           </Carousel.Caption>
