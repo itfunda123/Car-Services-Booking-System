@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Service from './pages/Service';
 import Contact from './pages/Contact';
+import Admin from './pages/Admin'; // ✅ Import Admin
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/about" element={<div className="container"><About /></div>} />
             <Route path="/service" element={<div className="container"><Service /></div>} />
             <Route path="/contact" element={<div className="container"><Contact /></div>} />
+            <Route path="/admin" element={<div className="container"><Admin /></div>} /> {/* ✅ Admin route */}
           </Routes>
         </div>
         <Footer />
